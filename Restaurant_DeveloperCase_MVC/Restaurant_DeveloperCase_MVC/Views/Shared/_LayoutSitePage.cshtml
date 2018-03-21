@@ -1,0 +1,21 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/styles")
+    @RenderSection("styles", false)
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("scripts", false)
+</body>
+</html>

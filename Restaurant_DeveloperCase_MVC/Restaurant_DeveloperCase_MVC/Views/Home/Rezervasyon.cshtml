@@ -1,0 +1,29 @@
+﻿@using Restaurant_DeveloperCase.DAL.Data
+@model Reservation
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.Hidden("AllTableId",TempData["TumMasalar"])
+        <label>Adınız:</label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Adınızı giriniz:" })
+        <span class="text-danger">@Html.ValidationMessageFor(x => x.Name)</span>
+        <label>Soyadınız:</label>
+        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Adınızı giriniz:" })
+        <span class="text-danger">@Html.ValidationMessageFor(x => x.LastName)</span>
+        <label>Rezervasyon Başlangıç Saati</label>
+        @Html.DropDownList("StartTime", (IEnumerable<SelectListItem>)ViewBag.Saatler, "Saat seçiniz", new { @class = "form-control" })
+        <span class="text-danger">@Html.ValidationMessage("StartTime")</span>
+        <label>Rezervasyon Bitiş Saati</label>
+        @Html.DropDownList("FinishTime", (IEnumerable<SelectListItem>)ViewBag.Saatler, "Saat seçiniz", new { @class = "form-control" })
+        <span class="text-danger">@Html.ValidationMessage("FinishTime")</span>
+        <label>Tarih:</label>
+        @Html.TextBox("Reservation_Date",(DateTime)TempData["Tarih"],new {@class="form-control",@type="readonly"})
+    </div>
+
+
+    <input type="submit" class="btn btn-success" value="İşlemi Tamamla"/>
+
+}

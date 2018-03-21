@@ -1,0 +1,83 @@
+﻿@using Restaurant_DeveloperCase.DAL.Model
+@model TableModel
+
+
+
+<div class="card-body">
+    <div class="form-group">
+        <label>Tarih:</label>
+        <input type="date" class="form-control" min="@DateTime.Today" name="date" id="date"/>
+    </div>
+
+    <div class="form-group" id="table">
+        @for (int i = 1; i <= 4; i++)
+            {
+            <button class="btn btn-success" style="margin-right:2px;" id="table_@i">@i</button>
+            }
+    </div>
+
+
+    <div class="form-group">
+        <input type="button" class="btn btn-dark" style="margin-right:16px;" value="Rezervasyon Oluştur" id="reservation" />
+    </div>
+
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+
+        $("#reservation").click(function () {
+            var tableId = $("#table").children(".btn-danger").text();
+            var date = $("#date").val();
+            $.get(
+                "/Home/Rezervasyon?Tarih=" + date + "&TableId=" + tableId, function (response) {
+                    $(".card-body").empty();
+                    $(".card-body").html(response);
+                }
+                );
+        })
+
+        var deger;
+
+        $("#table_1").click(function () {
+            $("#table_2").removeClass("btn-danger");
+            $("#table_3").removeClass("btn-danger");
+            $("#table_4").removeClass("btn-danger");
+            $(this).toggleClass("btn-danger");
+            deger = $(this).text();
+        });
+
+        $("#table_2").click(function () {
+            $("#table_1").removeClass("btn-danger");
+            $("#table_3").removeClass("btn-danger");
+            $("#table_4").removeClass("btn-danger");
+            $(this).toggleClass("btn-danger");
+            deger = $(this).text();
+        });
+
+        $("#table_3").click(function () {
+            $("#table_1").removeClass("btn-danger");
+            $("#table_2").removeClass("btn-danger");
+            $("#table_4").removeClass("btn-danger");
+            $(this).toggleClass("btn-danger");
+            deger = $(this).text();
+        });
+
+        $("#table_4").click(function () {
+            $("#table_1").removeClass("btn-danger");
+            $("#table_2").removeClass("btn-danger");
+            $("#table_3").removeClass("btn-danger");
+            $(this).toggleClass("btn-danger");
+            deger = $(this).text();
+        });
+
+       
+
+
+
+    </script>
+}
