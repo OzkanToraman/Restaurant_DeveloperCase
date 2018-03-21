@@ -39,7 +39,7 @@ namespace Restaurant_DeveloperCase_MVC.Controllers
                 .FirstOrDefault()
                 .Id;
             TempData["TumMasalar"] = allTableId;
-            TempData["Tarih"] = model.Tarih;
+            TempData["Tarih"] = model.Tarih.Date;
 
             return View();
         }
@@ -64,13 +64,14 @@ namespace Restaurant_DeveloperCase_MVC.Controllers
 
         private List<SelectListItem> SaatDoldur()
         {
-            string[] hours = { "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" };
+            IEnumerable<int> hours = Enumerable.Range(11, 12);
+            //string[] hours = { "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" };
 
             List<SelectListItem> saatler = new List<SelectListItem>();
 
             hours.ToList().ForEach(x => saatler.Add(new SelectListItem()
             {
-                Text = x.ToString(),
+                Text = x.ToString()+":00",
                 Value = x.ToString()
             }));
 

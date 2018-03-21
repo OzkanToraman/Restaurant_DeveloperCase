@@ -37,9 +37,6 @@ namespace Restaurant_DeveloperCase.DAL.Mapping
             Property(x => x.AllTableId)
                 .HasColumnType("int")
                 .IsRequired();
-            Property(x => x.UserAreaId)
-                .HasColumnType("int")
-                .IsRequired();
         }
     }
 }

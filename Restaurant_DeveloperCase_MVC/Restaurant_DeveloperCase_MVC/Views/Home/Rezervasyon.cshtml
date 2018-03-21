@@ -20,7 +20,7 @@
         @Html.DropDownList("FinishTime", (IEnumerable<SelectListItem>)ViewBag.Saatler, "Saat seçiniz", new { @class = "form-control" })
         <span class="text-danger">@Html.ValidationMessage("FinishTime")</span>
         <label>Tarih:</label>
-        @Html.TextBox("Reservation_Date",(DateTime)TempData["Tarih"],new {@class="form-control",@type="readonly"})
+        @Html.TextBox("ReservationDate",(DateTime)TempData["Tarih"],new {@class="form-control",@type="readonly"})
     </div>
 
 

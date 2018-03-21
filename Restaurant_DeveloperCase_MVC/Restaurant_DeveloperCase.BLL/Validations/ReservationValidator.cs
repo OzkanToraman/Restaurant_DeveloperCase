@@ -14,6 +14,8 @@ namespace Restaurant_DeveloperCase.BLL.Validations
         public ReservationValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("İsim boş geçilemez!");
+            RuleFor(x => x.StartTime).GreaterThanOrEqualTo(x => x.FinishTime).WithMessage("Hata!");
         }
+
     }
 }
