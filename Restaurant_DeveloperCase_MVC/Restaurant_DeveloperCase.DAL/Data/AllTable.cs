@@ -11,12 +11,14 @@ namespace Restaurant_DeveloperCase.DAL.Data
         public AllTable()
         {
             IsFill = false;
+            RezerveTarihi = DateTime.Today;
         }
 
         public int Id { get; set; }
         public int TableId { get; set; }
         public int ModId { get; set; }
         public bool IsFill { get; set; }
+        public DateTime RezerveTarihi { get; set; }
 
         public virtual Table Table { get; set; }
         public virtual Mod Mod{ get; set; }

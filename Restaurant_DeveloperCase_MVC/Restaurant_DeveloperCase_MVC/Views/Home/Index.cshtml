@@ -6,16 +6,21 @@
 <div class="card-body">
     <div class="form-group">
         <label>Tarih:</label>
-        <input type="date" class="form-control" min="@DateTime.Today" name="date" id="date"/>
+        <input type="date" class="form-control" min="@DateTime.Today" name="date" id="date" />
     </div>
 
     <div class="form-group" id="table">
-        @for (int i = 1; i <= 4; i++)
-            {
-            <button class="btn btn-success" style="margin-right:2px;" id="table_@i">@i</button>
-            }
+        <button class="btn btn-success" style="margin-right:2px;">MasaA</button>
+        <button class="btn btn-success" style="margin-right:2px;">MasaB</button>
+        <button class="btn btn-success" style="margin-right:2px;">MasaC</button>
+        <button class="btn btn-success" style="margin-right:2px;">MasaD</button>
     </div>
 
+    <label>Başlangıç Saati Seçiniz:</label>
+    <div class="form-group">
+        @Html.DropDownList("BaslangicSaati", (IEnumerable<SelectListItem>)ViewBag.Saatler, new { @class = "form-control", @id = "baslangicSaat" })
+        @Html.DropDownList("BitisSaati", (IEnumerable<SelectListItem>)ViewBag.Saatler, new { @class = "form-control", @id = "bitisSaat" })
+    </div>
 
     <div class="form-group">
         <input type="button" class="btn btn-dark" style="margin-right:16px;" value="Rezervasyon Oluştur" id="reservation" />
@@ -31,14 +36,25 @@
 
 
         $("#reservation").click(function () {
-            var tableId = $("#table").children(".btn-danger").text();
+            var tableName = $("#table").children(".btn-danger").text();
             var date = $("#date").val();
-            $.get(
-                "/Home/Rezervasyon?Tarih=" + date + "&TableId=" + tableId, function (response) {
+            var baslangicSaat = $("#baslangicSaat").val();
+            var bitisSaat = $("#bitisSaat").val();
+            //$.get(
+            //    "/Home/Rezervasyon?Tarih=" + date + "&TableId=" + tableId + "&Saat=" + saat, function (response) {
+            //        $(".card-body").empty();
+            //        $(".card-body").html(response);
+            //    }
+            //    );
+            $.get({
+                url: "/Home/Rezervasyon",
+                type: "get",
+                data: { Tarih: date, TableName: tableName, baslangicSaat: baslangicSaat, bitisSaat: bitisSaat },
+                success: function (response) {
                     $(".card-body").empty();
                     $(".card-body").html(response);
                 }
-                );
+            });
         })
 
         var deger;
@@ -75,7 +91,7 @@
             deger = $(this).text();
         });
 
-       
+
 
 
 

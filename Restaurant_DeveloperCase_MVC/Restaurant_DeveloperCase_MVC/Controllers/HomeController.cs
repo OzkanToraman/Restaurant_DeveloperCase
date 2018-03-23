@@ -20,28 +20,51 @@ namespace Restaurant_DeveloperCase_MVC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            bool IsAuthenticate = HttpContext.User.Identity.IsAuthenticated;
-            ViewBag.IsAuthenticate = IsAuthenticate;
+            ViewBag.Saatler = SaatDoldur();
             return View();
         }
 
         public ActionResult Rezervasyon(TableModel model)
         {
+
             ViewBag.Saatler = SaatDoldur();
             
             int modId = (model.Tarih.Day % 3);
             if (modId == 0)
                 modId = 3;
+
+            int tableId = 
+                _uow.GetRepo<Table>().Where(x => x.TableName == model.TableName && x.BaslangicSaati ==Convert.ToInt32(model.baslangicSaat))
+                .FirstOrDefault().Id;
+
             int allTableId = 
                 _uow.GetRepo<AllTable>()
                 .Where(x => 
-                x.ModId == modId && x.TableId == model.TableId)
+                x.ModId == modId && x.TableId == tableId)
                 .FirstOrDefault()
                 .Id;
+
+            RezerveKontrol(allTableId);
+            SaatKontrol(allTableId);
+
             TempData["TumMasalar"] = allTableId;
             TempData["Tarih"] = model.Tarih.Date;
 
             return View();
+        }
+
+        private void SaatKontrol(int allTableId)
+        {
+            AllTable masa = _uow.GetRepo<AllTable>().GetById(allTableId);
+            if (masa.RezerveTarihi < DateTime.Now)
+                masa.IsFill = false;
+        }
+
+        private RedirectToRouteResult RezerveKontrol(int allTableId)
+        {
+            if (_uow.GetRepo<AllTable>().GetById(allTableId).IsFill)
+                ViewBag.Msg = "Seçtiğiniz masa dolu!";
+             return RedirectToAction("Index");
         }
 
         [HttpPost][ValidateAntiForgeryToken]
@@ -51,7 +74,12 @@ namespace Restaurant_DeveloperCase_MVC.Controllers
 
             if (validator.IsValid)
             {
-
+                _uow.GetRepo<Reservation>().Add(model);
+                var masa = _uow.GetRepo<AllTable>().GetById(model.AllTableId);
+                masa.IsFill = true;
+                masa.RezerveTarihi = DateTime.Now;
+                if (_uow.Commit() > 0)
+                    ViewBag.Msg = "İşlem başarıyla gerçekleştirildi!";
             }
             else
             {

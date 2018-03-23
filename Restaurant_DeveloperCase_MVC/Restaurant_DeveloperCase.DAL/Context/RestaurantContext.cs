@@ -36,26 +36,7 @@ namespace Restaurant_DeveloperCase.DAL.Context
                 context.Mods.Add(new Mod() { Id = 2, ModName = "Tomorrow" });
                 context.Mods.Add(new Mod() { Id = 3, ModName = "AfterTomorrow" });
                 #endregion
-                #region TableSettings
-                context.Tables.Add(new Table() { Id = 1, TableName = "1" });
-                context.Tables.Add(new Table() { Id = 2, TableName = "2" });
-                context.Tables.Add(new Table() { Id = 3, TableName = "3" });
-                context.Tables.Add(new Table() { Id = 4, TableName = "4" });
-                #endregion
-                #region AllTableSettings
-                context.AllTables.Add(new AllTable() { Id = 1, ModId = 1, TableId = 1 });
-                context.AllTables.Add(new AllTable() { Id = 2, ModId = 1, TableId = 2 });
-                context.AllTables.Add(new AllTable() { Id = 3, ModId = 1, TableId = 3 });
-                context.AllTables.Add(new AllTable() { Id = 4, ModId = 1, TableId = 4 });
-                context.AllTables.Add(new AllTable() { Id = 5, ModId = 2, TableId = 1 });
-                context.AllTables.Add(new AllTable() { Id = 6, ModId = 2, TableId = 2 });
-                context.AllTables.Add(new AllTable() { Id = 7, ModId = 2, TableId = 3 });
-                context.AllTables.Add(new AllTable() { Id = 8, ModId = 2, TableId = 4 });
-                context.AllTables.Add(new AllTable() { Id = 9, ModId = 3, TableId = 1 });
-                context.AllTables.Add(new AllTable() { Id = 10, ModId = 3, TableId = 2 });
-                context.AllTables.Add(new AllTable() { Id = 11, ModId = 3, TableId = 3 });
-                context.AllTables.Add(new AllTable() { Id = 12, ModId = 3, TableId = 4 });
-                #endregion
+
 
                 base.Seed(context);
             }

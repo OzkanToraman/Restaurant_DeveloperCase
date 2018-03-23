@@ -9,7 +9,8 @@ namespace Restaurant_DeveloperCase.DAL.Model
     public class TableModel
     {
         public DateTime Tarih { get; set; }
-        public int ModId { get; set; }
-        public int TableId { get; set; }
+        public string TableName { get; set; }
+        public string baslangicSaat { get; set; }
+        public string bitisSaat { get; set; }
     }
 }

@@ -20,6 +20,9 @@ namespace Restaurant_DeveloperCase.DAL.Mapping
             Property(x => x.IsFill)
                 .HasColumnType("bit")
                 .IsRequired();
+            Property(x => x.RezerveTarihi)
+                .HasColumnType("date")
+                .IsRequired();
         }
     }
 }

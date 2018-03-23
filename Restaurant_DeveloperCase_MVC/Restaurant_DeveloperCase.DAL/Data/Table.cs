@@ -10,7 +10,8 @@ namespace Restaurant_DeveloperCase.DAL.Data
     {
         public int Id { get; set; }
         public string TableName { get; set; }
-        public string Description { get; set; }
+        public int BaslangicSaati { get; set; }
+        public int BitisSaati { get; set; }
 
         public virtual ICollection<AllTable> AllTables { get; set; }
     }

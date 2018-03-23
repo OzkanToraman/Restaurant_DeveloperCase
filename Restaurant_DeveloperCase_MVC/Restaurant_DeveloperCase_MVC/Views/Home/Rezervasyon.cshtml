@@ -1,6 +1,11 @@
 ﻿@using Restaurant_DeveloperCase.DAL.Data
 @model Reservation
 
+
+@if (ViewBag.Msg!=null)
+{
+    <span class="alert alert-success">@ViewBag.Msg</span>
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,12 +18,6 @@
         <label>Soyadınız:</label>
         @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Adınızı giriniz:" })
         <span class="text-danger">@Html.ValidationMessageFor(x => x.LastName)</span>
-        <label>Rezervasyon Başlangıç Saati</label>
-        @Html.DropDownList("StartTime", (IEnumerable<SelectListItem>)ViewBag.Saatler, "Saat seçiniz", new { @class = "form-control" })
-        <span class="text-danger">@Html.ValidationMessage("StartTime")</span>
-        <label>Rezervasyon Bitiş Saati</label>
-        @Html.DropDownList("FinishTime", (IEnumerable<SelectListItem>)ViewBag.Saatler, "Saat seçiniz", new { @class = "form-control" })
-        <span class="text-danger">@Html.ValidationMessage("FinishTime")</span>
         <label>Tarih:</label>
         @Html.TextBox("ReservationDate",(DateTime)TempData["Tarih"],new {@class="form-control",@type="readonly"})
     </div>

@@ -16,11 +16,12 @@ namespace Restaurant_DeveloperCase.DAL.Mapping
                 .HasMaxLength(50)
                 .IsUnicode()
                 .IsRequired();
-            Property(x => x.Description)
-                .HasColumnType("nvarchar")
-                .HasMaxLength(200)
-                .IsUnicode()
-                .IsOptional();
+            Property(x => x.BaslangicSaati)
+                .HasColumnType("int")
+                .IsRequired();
+            Property(x => x.BitisSaati)
+                .HasColumnType("int")
+                .IsRequired();
         }
     }
 }
